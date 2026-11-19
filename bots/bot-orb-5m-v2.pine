@@ -1,0 +1,87 @@
+//@version=5
+// Bot ORB 5m - versão 2 (várias operações por dia)
+// Regra: rompimento da faixa de abertura (9h30-9h45 de Nova York) em velas de 5 minutos.
+// Compra quando uma vela FECHA acima da máxima da faixa; stop no meio da faixa; alvo em 2R.
+// Até N trades por dia (padrão 3), com rearme: depois de sair, só entra de novo quando
+// o preço volta para dentro da faixa e rompe outra vez. Para no dia após X stops (padrão 2).
+// Zera às 15h55 de NY. Taxa de 0,1% por lado (Binance à vista).
+// Uso: backtest no TradingView (Testador de estratégia). Não envia ordens sozinho.
+strategy("Bot ORB 5m v2", overlay = true, initial_capital = 100,
+     default_qty_type = strategy.percent_of_equity, default_qty_value = 100,
+     commission_type = strategy.commission.percent, commission_value = 0.1)
+
+// ===== Configurações (mude pela engrenagem) =====
+lados  = input.string("Só compra", "Lados", options = ["Só compra", "Compra e venda"])
+faixa  = input.session("0930-0945", "Faixa de abertura (horário de NY)")
+janela = input.session("0945-1530", "Janela de entradas (NY)")
+zerar  = input.session("1555-1600", "Zerar posição (NY)")
+rAlvo  = input.float(2.0, "Alvo em R", step = 0.5)
+maxTrades = input.int(3, "Máximo de trades por dia", minval = 1, maxval = 20)
+maxPerdas = input.int(2, "Parar no dia depois de X stops", minval = 1, maxval = 20)
+fuso   = "America/New_York"
+
+naFaixa  = not na(time(timeframe.period, faixa,  fuso))
+naJanela = not na(time(timeframe.period, janela, fuso))
+naZerar  = not na(time(timeframe.period, zerar,  fuso))
+
+// ===== Faixa de abertura do dia =====
+var float orH  = na
+var float orL  = na
+var int   tradesHoje = 0
+var int   perdasIni  = 0
+var bool  armadoC = true
+var bool  armadoV = true
+
+novoDia = dayofmonth(time, fuso) != dayofmonth(time[1], fuso)
+if novoDia
+    orH   := na
+    orL   := na
+    tradesHoje := 0
+    perdasIni  := strategy.losstrades
+    armadoC    := true
+    armadoV    := true
+
+if naFaixa
+    orH := na(orH) ? high : math.max(orH, high)
+    orL := na(orL) ? low  : math.min(orL, low)
+
+pronta = not na(orH) and not naFaixa
+meio   = (orH + orL) / 2
+
+// ===== Rearme: o preço precisa voltar para dentro da faixa antes de nova entrada =====
+if pronta and close <= orH
+    armadoC := true
+if pronta and close >= orL
+    armadoV := true
+
+perdasHoje = strategy.losstrades - perdasIni
+
+// ===== Entradas =====
+podeEntrar = pronta and naJanela and tradesHoje < maxTrades and perdasHoje < maxPerdas and strategy.position_size == 0
+sinalCompra = podeEntrar and armadoC and close > orH
+sinalVenda  = podeEntrar and armadoV and lados == "Compra e venda" and close < orL
+
+if sinalCompra
+    r = close - meio
+    strategy.entry("Compra", strategy.long)
+    strategy.exit("Saída compra", "Compra", stop = meio, limit = close + rAlvo * r)
+    tradesHoje += 1
+    armadoC := false
+    alert('{"acao":"compra","par":"' + syminfo.ticker + '","preco":' + str.tostring(close) + '}', alert.freq_once_per_bar_close)
+
+if sinalVenda
+    r = meio - close
+    strategy.entry("Venda", strategy.short)
+    strategy.exit("Saída venda", "Venda", stop = meio, limit = close - rAlvo * r)
+    tradesHoje += 1
+    armadoV := false
+    alert('{"acao":"venda","par":"' + syminfo.ticker + '","preco":' + str.tostring(close) + '}', alert.freq_once_per_bar_close)
+
+// ===== Zerar no fim do dia =====
+if naZerar and strategy.position_size != 0
+    strategy.close_all(comment = "Zerar")
+
+// ===== Desenho no gráfico =====
+plot(pronta ? orH  : na, "Máxima da faixa", color.blue, 2, plot.style_linebr)
+plot(pronta ? orL  : na, "Mínima da faixa", color.gray, 1, plot.style_linebr)
+plot(pronta ? meio : na, "Stop (meio)",     color.red,  1, plot.style_linebr)
