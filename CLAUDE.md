@@ -24,3 +24,8 @@ Extras: `/trader-alerts` (alertas de preço), `/trader-analyst` (análise de
 resultados), `/trader-pelosi` (trades declarados por membros do Congresso dos EUA).
 
 Preços em US$ e horários no fuso de Nova York (ET). Nada aqui é recomendação de investimento.
+
+## Skill de VSL (`.claude/skills/vsl-pro`)
+`/vsl-pro` – cria VSLs (vídeos de vendas) do briefing ao MP4: roteiro em 12 blocos,
+narração (edge-tts, áudio próprio ou só texto) e render em 9:16, 1:1 ou 16:9 via
+`scripts/render_vsl.py`. Requer `ffmpeg`, `pillow`, `numpy` (e `edge-tts` para voz sintética).
