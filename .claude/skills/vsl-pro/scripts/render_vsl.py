@@ -129,7 +129,7 @@ for i, sc in enumerate(scenes):
         sc["_audio"] = P(sc["audio"])
     nominal = sc.get("dur") or (max([it[0] for it in sc["items"]] + [0]) + 3)
     if sc["_audio"]:
-        real = adur(sc["_audio"]) + 0.9
+        real = adur(sc["_audio"]) + S.get("pad", 0.9)  # folga após a fala (menor = vídeo mais ágil)
         f = real / nominal
         sc["items"] = [[t * f, k, tx] for t, k, tx in sc["items"]]
         sc["dur"] = real

@@ -36,6 +36,7 @@ Crie um `vsl.json` seguindo `examples/exemplo.json`. Campos principais:
 - `photo`, `size` (`1080x1920`, `1080x1080` ou `1920x1080`), `accent` (cor de destaque em hex), `brand`
 - `voice`: `"edge"` (gera narração com edge-tts), `"files"` (cada cena tem `"audio": "caminho.mp3"`) ou `"none"`
 - `edge_voice`: ex. `pt-BR-AntonioNeural` (masculina) ou `pt-BR-FranciscaNeural` (feminina)
+- `pad`: folga em segundos após cada fala (padrão 0.9; use ~0.5 para um vídeo mais ágil). `music`: caminho de uma trilha própria (wav/mp3); `music_volume`: volume dela sob a voz (padrão 0.13)
 - `scenes`: lista com `mode` (`hero` = foto em destaque com zoom lento; `dark` = fundo escuro desfocado), `say` (fala da narração), `dur` (segundos — opcional se houver narração; aí a duração segue o áudio) e `items`.
 - `items`: `[tempo, tipo, texto]`. Tipos: `h` título branco, `g` título destaque, `s` texto menor, `x` nome grande do produto, `price` preço gigante, `b` item com check, `tag` pílula, `strike` texto riscado (preço antigo).
   O tempo pode ser número (segundos) ou fração `"0.4"`… use números simples; com narração, os tempos são ajustados proporcionalmente à duração real da cena.
