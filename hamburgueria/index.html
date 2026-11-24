@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brasa & Brioche</title>
+<meta name="description" content="Hamburgueria artesanal na brasa. Blend 180g de costela, cheddar que escorre e brioche na manteiga.">
+<meta property="og:title" content="Brasa & Brioche — Feito na brasa">
+<meta property="og:description" content="Blend 180g de costela, cheddar que escorre e brioche na manteiga.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0907; --bg2:#15100c; --ember:#ff6a1a; --gold:#e0a646; --cream:#f3e6d0;
+    --muted:#a8998a; --line:rgba(243,230,208,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--cream);font-family:"DM Sans",system-ui,sans-serif;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .display{font-family:Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:.92;font-weight:400}
+  .serif{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;text-transform:none;letter-spacing:0}
+  .ember{color:var(--ember)}
+
+  /* granulação de filme */
+  body::after{content:"";position:fixed;inset:-50%;pointer-events:none;z-index:50;opacity:.07;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation:grain .8s steps(4) infinite}
+  @keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}100%{transform:translate(0,0)}}
+
+  /* navegação */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(16px,4vw,48px);
+    background:linear-gradient(var(--bg),rgba(13,9,7,0))}
+  .logo{font-family:Anton,sans-serif;font-size:22px;letter-spacing:.04em;text-decoration:none}
+  .logo b{color:var(--ember);font-weight:400}
+  .nav nav{display:flex;gap:22px;align-items:center;font-size:14px}
+  .nav nav a{text-decoration:none;opacity:.8}
+  .nav nav a:hover{opacity:1}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--ember);color:#1a0a02;font-weight:700;text-decoration:none;
+    padding:14px 26px;border-radius:999px;font-size:16px;transition:transform .25s,box-shadow .25s;box-shadow:0 0 0 rgba(255,106,26,0)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(255,106,26,.35)}
+  .btn.ghost{background:transparent;color:var(--cream);border:1px solid var(--line)}
+  .btn.small{padding:10px 18px;font-size:14px}
+  @media (max-width:640px){.nav nav a:not(.btn){display:none}}
+
+  /* hero */
+  .hero{height:460vh;position:relative;background:var(--bg)}
+  .sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+  #seq{position:absolute;inset:0;width:100%;height:100%;display:block}
+  .vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 60% 50%,transparent 40%,rgba(0,0,0,.75) 100%)}
+  .bars::before,.bars::after{content:"";position:absolute;left:0;right:0;height:5vh;background:#000;z-index:2}
+  .bars::before{top:0}.bars::after{bottom:0}
+  .beat{position:absolute;z-index:3;left:clamp(16px,6vw,96px);top:50%;width:min(44vw,560px);
+    opacity:0;transform:translateY(calc(-50% + 30px));filter:blur(6px);
+    transition:opacity .7s ease,transform .9s cubic-bezier(.2,.7,.2,1),filter .7s ease;pointer-events:none}
+  .beat.on{opacity:1;transform:translateY(-50%);filter:blur(0);pointer-events:auto}
+  .eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;display:flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:34px;height:1px;background:var(--gold)}
+  .beat h1,.beat h2{font-size:clamp(44px,7.2vw,112px)}
+  .beat h1 .serif,.beat h2 .serif{font-size:.82em;display:block;color:var(--ember)}
+  .beat p{margin-top:20px;color:var(--muted);font-size:clamp(15px,1.3vw,18px);max-width:420px}
+  .beat .actions{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+  .hint{position:absolute;z-index:3;bottom:calc(5vh + 22px);left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);
+    display:flex;flex-direction:column;align-items:center;gap:10px;transition:opacity .5s}
+  .hint i{width:1px;height:38px;background:linear-gradient(var(--ember),transparent);animation:drop 1.6s ease-in-out infinite}
+  @keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+  .progress{position:absolute;z-index:3;right:clamp(16px,3vw,40px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px}
+  .progress span{width:2px;height:28px;background:var(--line);position:relative;overflow:hidden}
+  .progress span i{position:absolute;inset:0;background:var(--ember);transform:scaleY(0);transform-origin:top}
+  @media (max-width:768px){
+    .beat{left:16px;right:16px;width:auto;top:calc(5vh + 70px);transform:translateY(24px)}
+    .beat.on{transform:none}
+    .beat h1,.beat h2{font-size:clamp(40px,12vw,64px)}
+    .beat p{margin-top:12px;font-size:15px}
+    .beat .actions{margin-top:18px}
+    .vignette{background:radial-gradient(ellipse at 50% 60%,transparent 35%,rgba(0,0,0,.8) 100%)}
+    .progress{display:none}
+  }
+
+  /* faixa corrida */
+  .marquee{border-block:1px solid var(--line);overflow:hidden;padding:22px 0;background:var(--bg2)}
+  .marquee div{display:flex;gap:48px;width:max-content;animation:run 32s linear infinite;font-family:Anton,sans-serif;font-size:clamp(28px,4vw,52px);text-transform:uppercase;white-space:nowrap}
+  .marquee span:nth-child(even){color:transparent;-webkit-text-stroke:1px var(--cream)}
+  .marquee em{color:var(--ember);font-style:normal}
+  @keyframes run{to{transform:translateX(-50%)}}
+
+  /* seções */
+  section.block{padding:clamp(80px,12vw,160px) clamp(16px,6vw,96px);max-width:1320px;margin:0 auto}
+  .head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:56px}
+  .head h2{font-size:clamp(44px,6.5vw,96px)}
+  .head p{max-width:380px;color:var(--muted)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .card{border:1px solid var(--line);border-radius:22px;padding:34px 28px;background:linear-gradient(160deg,rgba(255,106,26,.07),transparent 55%);position:relative;overflow:hidden}
+  .card .n{font-family:Anton,sans-serif;font-size:64px;color:transparent;-webkit-text-stroke:1px rgba(255,106,26,.6);line-height:1}
+  .card h3{font-family:Anton,sans-serif;font-weight:400;text-transform:uppercase;font-size:28px;margin:26px 0 10px;letter-spacing:.01em}
+  .card p{color:var(--muted);font-size:15px}
+  @media (max-width:860px){.cards{grid-template-columns:1fr}}
+
+  .menu{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .item{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:center;border:1px solid var(--line);border-radius:22px;padding:16px 26px 16px 16px;background:var(--bg2);transition:border-color .3s,transform .3s}
+  .item:hover{border-color:rgba(255,106,26,.45);transform:translateY(-3px)}
+  .item canvas{width:200px;height:160px;border-radius:14px;background:radial-gradient(circle at 50% 60%,rgba(255,106,26,.18),transparent 70%),#0f0b08}
+  .item .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .item h3{font-family:Anton,sans-serif;font-weight:400;text-transform:uppercase;font-size:26px;letter-spacing:.01em}
+  .item .price{font-family:"Instrument Serif",serif;font-style:italic;font-size:28px;color:var(--gold);white-space:nowrap}
+  .item p{color:var(--muted);font-size:14px;margin-top:6px}
+  .tag{display:inline-block;margin-top:12px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ember);border:1px solid rgba(255,106,26,.4);padding:4px 10px;border-radius:999px}
+  @media (max-width:980px){.menu{grid-template-columns:1fr}}
+  @media (max-width:520px){.item{grid-template-columns:1fr;padding:14px}.item canvas{width:100%;height:190px}}
+
+  .cta{position:relative;text-align:center;padding:clamp(100px,16vw,200px) 16px;overflow:hidden;border-top:1px solid var(--line)}
+  .cta::before{content:"";position:absolute;left:50%;bottom:-40%;width:120vw;height:90%;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(255,106,26,.35),transparent 65%);pointer-events:none}
+  .cta h2{font-size:clamp(54px,11vw,170px);position:relative}
+  .cta h2 .serif{display:block;font-size:.55em;color:var(--ember)}
+  .cta p{color:var(--muted);margin:22px auto 34px;max-width:460px;position:relative}
+  .cta .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
+
+  footer{border-top:1px solid var(--line);padding:48px clamp(16px,6vw,96px);display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;font-size:14px;color:var(--muted)}
+  footer h4{color:var(--cream);font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:10px;font-weight:500}
+  footer .logo{color:var(--cream);font-size:28px;display:block;margin-bottom:10px}
+  .demo{grid-column:1/-1;border-top:1px solid var(--line);padding-top:20px;font-size:12px;opacity:.7}
+  @media (max-width:760px){footer{grid-template-columns:1fr 1fr}footer>div:first-child{grid-column:1/-1}}
+
+  .wa{position:fixed;right:18px;bottom:18px;z-index:45;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.45);transition:transform .25s}
+  .wa:hover{transform:scale(1.08)}
+
+  /* entrada suave das seções */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none}
+    .marquee div,body::after{animation:none}
+    .hero{height:100vh}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="logo" href="#">BRASA<b>&amp;</b>BRIOCHE</a>
+  <nav>
+    <a href="#diferenciais">A casa</a>
+    <a href="#cardapio">Cardápio</a>
+    <a class="btn small" href="#pedido">Pedir agora</a>
+  </nav>
+</header>
+
+<section id="hero" class="hero">
+  <div class="sticky bars">
+    <canvas id="seq" aria-label="Hambúrguer artesanal se abrindo em camadas"></canvas>
+    <div class="vignette"></div>
+
+    <div class="beat" data-from="0" data-to="0.12">
+      <div class="eyebrow">Smash &amp; Grill · desde a primeira brasa</div>
+      <h1 class="display">Feito na brasa. <span class="serif">Do jeito certo.</span></h1>
+    </div>
+    <div class="beat" data-from="0.12" data-to="0.5">
+      <div class="eyebrow">Capítulo 01</div>
+      <h2 class="display">Cada camada <span class="serif">tem um motivo.</span></h2>
+      <p>Nada de enfeite. Cada ingrediente entra porque deixa a mordida melhor.</p>
+    </div>
+    <div class="beat" data-from="0.5" data-to="0.78">
+      <div class="eyebrow">Capítulo 02</div>
+      <h2 class="display">Blend 180g. <span class="serif">Cheddar que escorre.</span></h2>
+      <p>Costela moída na casa, selada na chapa bem quente e finalizada na brasa.</p>
+    </div>
+    <div class="beat" data-from="0.78" data-to="1.01">
+      <div class="eyebrow">Capítulo final</div>
+      <h2 class="display">A brasa <span class="serif">já está acesa.</span></h2>
+      <div class="actions">
+        <a class="btn" href="#pedido">Pedir no WhatsApp →</a>
+        <a class="btn ghost" href="#cardapio">Ver cardápio</a>
+      </div>
+    </div>
+
+    <div class="hint" id="hint">Role para abrir<i></i></div>
+    <div class="progress" aria-hidden="true"><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span></div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div>
+  <span>Brasa</span><em>✦</em><span>Brioche</span><em>✦</em><span>Blend 180g</span><em>✦</em><span>Cheddar</span><em>✦</em><span>Bacon defumado</span><em>✦</em>
+  <span>Brasa</span><em>✦</em><span>Brioche</span><em>✦</em><span>Blend 180g</span><em>✦</em><span>Cheddar</span><em>✦</em><span>Bacon defumado</span><em>✦</em>
+</div></div>
+
+<section class="block" id="diferenciais">
+  <div class="head reveal">
+    <h2 class="display">Sem atalho. <span class="serif ember">Só fogo.</span></h2>
+    <p>Três regras que a gente não quebra, nem em dia de casa cheia.</p>
+  </div>
+  <div class="cards">
+    <article class="card reveal"><div class="n">01</div><h3>Carne moída na casa</h3><p>Blend de costela e acém moído todo dia, nunca congelado.</p></article>
+    <article class="card reveal"><div class="n">02</div><h3>Brioche na manteiga</h3><p>Pão macio, tostado na chapa na hora de montar.</p></article>
+    <article class="card reveal"><div class="n">03</div><h3>Finalizado na brasa</h3><p>O toque defumado que a chapa sozinha não entrega.</p></article>
+  </div>
+</section>
+
+<section class="block" id="cardapio">
+  <div class="head reveal">
+    <h2 class="display">O cardápio <span class="serif ember">da noite.</span></h2>
+    <p>Todos servidos no brioche. Batata rústica à parte.</p>
+  </div>
+  <div class="menu">
+    <article class="item reveal"><canvas data-burger="classic"></canvas><div>
+      <div class="row"><h3>Clássico Brasa</h3><span class="price">R$ 34</span></div>
+      <p>Blend 180g, cheddar, alface, tomate e maionese da casa.</p></div></article>
+    <article class="item reveal"><canvas data-burger="bacon"></canvas><div>
+      <div class="row"><h3>Bacon Smoke</h3><span class="price">R$ 39</span></div>
+      <p>Blend 180g, cheddar duplo e bacon defumado crocante.</p><span class="tag">Mais pedido</span></div></article>
+    <article class="item reveal"><canvas data-burger="double"></canvas><div>
+      <div class="row"><h3>Duplo Fogo</h3><span class="price">R$ 46</span></div>
+      <p>Dois blends de 180g, dois cheddars e bacon. Para a fome de verdade.</p></div></article>
+    <article class="item reveal"><canvas data-burger="salad"></canvas><div>
+      <div class="row"><h3>Brasa Verde</h3><span class="price">R$ 32</span></div>
+      <p>Blend 180g, cheddar, muita alface e tomate fresco.</p></div></article>
+  </div>
+</section>
+
+<section class="cta" id="pedido">
+  <h2 class="display reveal">Bateu a fome? <span class="serif">A chapa tá quente.</span></h2>
+  <p class="reveal">Peça pelo WhatsApp e retire no balcão ou receba em casa.</p>
+  <div class="actions reveal">
+    <a class="btn" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20fazer%20um%20pedido." target="_blank" rel="noopener">Pedir no WhatsApp →</a>
+    <a class="btn ghost" href="#cardapio">Ver cardápio</a>
+  </div>
+</section>
+
+<footer>
+  <div><span class="logo">BRASA<b class="ember" style="font-weight:400">&amp;</b>BRIOCHE</span>Hamburgueria artesanal na brasa.</div>
+  <div><h4>Endereço</h4>[PREENCHER]<br>Cidade / UF</div>
+  <div><h4>Horário</h4>[PREENCHER]<br>Ter a Dom · 18h às 23h</div>
+  <div><h4>Siga</h4><a href="#">Instagram</a><br><a href="#">iFood</a></div>
+  <div class="demo">Página demonstrativa: nome, preços, endereço e contatos são fictícios.</div>
+</footer>
+
+<a class="wa" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Quero%20fazer%20um%20pedido." target="_blank" rel="noopener" aria-label="Pedir pelo WhatsApp">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></svg>
+</a>
+
+<script>
+(() => {
+  const TAU = Math.PI * 2;
+  const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  const ease = t => t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+  const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t*t*(3 - 2*t); };
+  const rng = s => () => (s = (s * 16807) % 2147483647, (s - 1) / 2147483646);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- camadas do hambúrguer (desenho procedural) ---------- */
+  function cylinder(c, R, ry, th, side, top) {
+    c.beginPath();
+    c.moveTo(R, -th/2); c.lineTo(R, th/2);
+    c.ellipse(0, th/2, R, ry, 0, 0, Math.PI, false);
+    c.lineTo(-R, -th/2); c.closePath();
+    c.fillStyle = side; c.fill();
+    c.beginPath(); c.ellipse(0, -th/2, R, ry, 0, 0, TAU);
+    c.fillStyle = top; c.fill();
+  }
+  const lin = (c, y0, y1, stops) => { const g = c.createLinearGradient(0, y0, 0, y1); stops.forEach((s, i) => g.addColorStop(i / (stops.length - 1), s)); return g; };
+  const rad = (c, x, y, r, a, b) => { const g = c.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, a); g.addColorStop(1, b); return g; };
+
+  const LAYERS = {
+    bottomBun(c, W) {
+      const R = W*.5, ry = W*.1, th = W*.13;
+      cylinder(c, R, ry, th, lin(c, -th/2, th/2 + ry, ['#d18a3e', '#a35a22', '#5a2c0f']), rad(c, -W*.08, -th/2 - ry*.2, R, '#f6dca6', '#d6a35c'));
+      c.globalAlpha = .25; const r = rng(7);
+      for (let i = 0; i < 60; i++) { const a = r()*TAU, d = Math.sqrt(r()); c.fillStyle = '#a36b2e';
+        c.beginPath(); c.ellipse(Math.cos(a)*d*R*.9, -th/2 + Math.sin(a)*d*ry*.9, W*.006, W*.003, 0, 0, TAU); c.fill(); }
+      c.globalAlpha = 1;
+    },
+    lettuce(c, W) {
+      const R = W*.57, ry = W*.105; c.beginPath();
+      for (let i = 0; i <= 200; i++) {
+        const t = i / 200 * TAU, m = 1 + .05*Math.sin(t*13) + .025*Math.sin(t*29 + 1);
+        const droop = Math.max(0, Math.sin(t)) * W*.035 * (.5 + .5*Math.sin(t*7));
+        const x = Math.cos(t)*R*m, y = Math.sin(t)*ry*m + droop;
+        i ? c.lineTo(x, y) : c.moveTo(x, y);
+      }
+      c.closePath(); c.fillStyle = lin(c, -ry, ry + W*.04, ['#b6ea6a', '#6cbc32', '#2f7a16']); c.fill();
+      c.strokeStyle = 'rgba(30,80,10,.6)'; c.lineWidth = W*.004; c.stroke();
+    },
+    tomato(c, W) {
+      const R = W*.46, ry = W*.088, th = W*.04;
+      cylinder(c, R, ry, th, lin(c, 0, th + ry, ['#c32a18', '#8d140c']), rad(c, 0, -th/2, R, '#ff7a55', '#d42a1b'));
+      c.fillStyle = 'rgba(255,190,140,.55)';
+      for (let i = 0; i < 6; i++) { const a = i/6*TAU + .3;
+        c.beginPath(); c.ellipse(Math.cos(a)*R*.55, -th/2 + Math.sin(a)*ry*.55, R*.13, ry*.22, 0, 0, TAU); c.fill(); }
+    },
+    patty(c, W) {
+      const R = W*.53, ry = W*.1, th = W*.13;
+      cylinder(c, R, ry, th, lin(c, -th/2, th/2 + ry, ['#6e3519', '#4a2412', '#24100a']), rad(c, -W*.1, -th/2 - ry*.3, R*1.1, '#7d4120', '#33170b'));
+      const r = rng(42);
+      for (let i = 0; i < 260; i++) {
+        const top = r() < .45, a = r()*TAU, d = Math.sqrt(r());
+        const x = top ? Math.cos(a)*d*R*.95 : (r()*2 - 1)*R*.97;
+        const y = top ? -th/2 + Math.sin(a)*d*ry*.95 : -th/2 + r()*th + Math.sqrt(1 - (x/R)**2)*ry*.9;
+        c.fillStyle = r() < .6 ? 'rgba(15,5,2,.55)' : 'rgba(190,110,60,.35)';
+        c.beginPath(); c.arc(x, y, W*(.003 + r()*.006), 0, TAU); c.fill();
+      }
+      c.strokeStyle = 'rgba(15,5,2,.6)'; c.lineWidth = W*.006;
+      c.beginPath(); c.ellipse(0, -th/2, R, ry, 0, 0, TAU); c.stroke();
+      c.fillStyle = 'rgba(255,210,170,.14)';
+      c.beginPath(); c.ellipse(-R*.35, -th/2 - ry*.3, R*.25, ry*.18, -.1, 0, TAU); c.fill();
+    },
+    cheese(c, W) {
+      c.beginPath();
+      c.moveTo(-.6*W, .02*W);
+      c.quadraticCurveTo(-.3*W, -.08*W, 0, -.115*W);
+      c.quadraticCurveTo(.3*W, -.08*W, .6*W, .02*W);
+      c.quadraticCurveTo(.63*W, .1*W, .55*W, .11*W);
+      c.quadraticCurveTo(.3*W, .09*W, .09*W, .13*W);
+      c.quadraticCurveTo(.05*W, .25*W, 0, .26*W);
+      c.quadraticCurveTo(-.05*W, .25*W, -.07*W, .13*W);
+      c.quadraticCurveTo(-.3*W, .1*W, -.54*W, .12*W);
+      c.quadraticCurveTo(-.64*W, .09*W, -.6*W, .02*W);
+      c.closePath();
+      c.fillStyle = lin(c, -.12*W, .26*W, ['#ffe066', '#ffbf2a', '#e88a0c']); c.fill();
+      c.fillStyle = 'rgba(255,255,220,.25)';
+      c.beginPath(); c.ellipse(-.15*W, -.05*W, .2*W, .025*W, -.12, 0, TAU); c.fill();
+      c.fillStyle = '#f0a01a'; c.beginPath(); c.ellipse(.34*W, .15*W, .018*W, .03*W, 0, 0, TAU); c.fill();
+    },
+    bacon(c, W) {
+      [-1, 1].forEach(k => {
+        const path = (dy) => { c.beginPath();
+          for (let i = 0; i <= 60; i++) { const x = -.5*W + i/60*W; const y = Math.sin(x/W*13 + k*1.7)*.02*W + k*.03*W + dy;
+            i ? c.lineTo(x, y) : c.moveTo(x, y); } };
+        c.lineCap = 'round';
+        path(0); c.strokeStyle = '#7d2114'; c.lineWidth = W*.055; c.stroke();
+        path(-.006*W); c.strokeStyle = '#b5402a'; c.lineWidth = W*.035; c.stroke();
+        path(-.008*W); c.strokeStyle = 'rgba(245,190,160,.85)'; c.lineWidth = W*.012; c.stroke();
+      });
+    },
+    topBun(c, W) {
+      const r = W*.5;
+      c.beginPath();
+      c.moveTo(-r, 0);
+      c.bezierCurveTo(-r, -W*.44, r, -W*.44, r, 0);
+      c.bezierCurveTo(r*.92, W*.07, -r*.92, W*.07, -r, 0);
+      c.closePath();
+      c.fillStyle = lin(c, -W*.33, W*.05, ['#f7bd62', '#d9832c', '#9b4f17', '#6a3210']); c.fill();
+      c.fillStyle = rad(c, -W*.16, -W*.22, W*.32, 'rgba(255,236,190,.55)', 'rgba(255,236,190,0)'); c.fill();
+      const s = rng(11);
+      for (let i = 0; i < 34; i++) {
+        const x = (s()*2 - 1)*r*.78, h = W*.33*Math.sqrt(Math.max(0, 1 - (x/r)**2));
+        const y = -h*(.3 + s()*.6), a = s()*Math.PI;
+        c.fillStyle = 'rgba(80,35,10,.35)'; c.beginPath(); c.ellipse(x + W*.003, y + W*.004, W*.013, W*.006, a, 0, TAU); c.fill();
+        c.fillStyle = '#fbefd4'; c.beginPath(); c.ellipse(x, y, W*.013, W*.006, a, 0, TAU); c.fill();
+      }
+    }
+  };
+
+  const LABELS = { topBun: 'Brioche na manteiga', bacon: 'Bacon defumado', cheese: 'Cheddar derretido',
+    patty: 'Blend 180g de costela', tomato: 'Tomate fresco', lettuce: 'Alface americana', bottomBun: 'Brioche tostado' };
+
+  // pilha montada: [camada, y em frações de W]
+  const STACKS = {
+    hero:    [['bottomBun', .30], ['lettuce', .19], ['tomato', .15], ['patty', .06], ['cheese', -.02], ['bacon', -.05], ['topBun', -.07]],
+    classic: [['bottomBun', .26], ['lettuce', .15], ['tomato', .11], ['patty', .02], ['cheese', -.06], ['topBun', -.09]],
+    bacon:   [['bottomBun', .26], ['patty', .14], ['cheese', .06], ['bacon', .02], ['topBun', 0]],
+    double:  [['bottomBun', .36], ['patty', .24], ['cheese', .16], ['patty', .07], ['cheese', -.01], ['bacon', -.04], ['topBun', -.06]],
+    salad:   [['bottomBun', .26], ['lettuce', .15], ['tomato', .11], ['lettuce', .07], ['patty', 0], ['cheese', -.08], ['topBun', -.11]]
+  };
+
+  function drawBurger(c, cx, cy, W, e, opts = {}) {
+    const stack = STACKS[opts.stack || 'hero'], n = stack.length, gap = W*.165;
+    // sombra no chão
+    c.save(); c.translate(cx, cy + W*.48 + e*gap*(n/2 - .5)*.6);
+    c.fillStyle = rad(c, 0, 0, W*.6, 'rgba(0,0,0,.65)', 'rgba(0,0,0,0)');
+    c.scale(1, .18); c.beginPath(); c.arc(0, 0, W*.6, 0, TAU); c.fill(); c.restore();
+
+    const pos = [];
+    stack.forEach(([name, y], i) => {
+      const k = i - (n - 1)/2;
+      const oy = -k*gap*e, ox = Math.sin(i*2.3)*W*.035*e, rot = (i % 2 ? 1 : -1)*.05*e;
+      c.save(); c.translate(cx + ox, cy + (y - .02)*W + oy); c.rotate(rot);
+      LAYERS[name](c, W); c.restore();
+      pos.push([name, cx + ox, cy + (y - .02)*W + oy]);
+    });
+
+    if (opts.labels > 0) {
+      c.save(); c.globalAlpha = opts.labels;
+      const fs = Math.max(13, W*.042);
+      c.font = `500 ${fs}px "DM Sans", sans-serif`; c.textBaseline = 'middle';
+      pos.forEach(([name, x, y], i) => {
+        const yy = name === 'topBun' ? y - W*.16 : y;
+        const x0 = x + W*.6, x1 = x + W*.72 + (1 - opts.labels)*20;
+        c.strokeStyle = 'rgba(243,230,208,.35)'; c.lineWidth = 1;
+        c.beginPath(); c.moveTo(x0, yy); c.lineTo(x1, yy); c.stroke();
+        c.fillStyle = '#ff6a1a'; c.beginPath(); c.arc(x0, yy, 3, 0, TAU); c.fill();
+        c.fillStyle = '#f3e6d0'; c.fillText(LABELS[name], x1 + 10, yy);
+      });
+      c.restore();
+    }
+  }
+
+  /* ---------- hero ---------- */
+  const hero = document.getElementById('hero');
+  const canvas = document.getElementById('seq');
+  const ctx = canvas.getContext('2d');
+  const beats = [...document.querySelectorAll('.beat')];
+  const bars = [...document.querySelectorAll('.progress i')];
+  const hint = document.getElementById('hint');
+  let w = 0, h = 0, dpr = 1, pTarget = 0, p = 0, t0 = performance.now();
+  const embers = [];
+
+  function resize() {
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    w = innerWidth; h = innerHeight;
+    canvas.width = w*dpr; canvas.height = h*dpr;
+  }
+  function progress() {
+    const r = hero.getBoundingClientRect();
+    return clamp(-r.top / (r.height - innerHeight), 0, 1);
+  }
+
+  function spawn(cx, cy, W) {
+    embers.push({ x: cx + (Math.random() - .5)*W*1.4, y: cy + W*(.3 + Math.random()*.4),
+      vx: (Math.random() - .5)*.4, vy: -(.4 + Math.random()*1.1), life: 1, s: .6 + Math.random()*2.2, f: Math.random()*TAU });
+  }
+
+  function frame(now) {
+    const time = (now - t0)/1000;
+    pTarget = progress();
+    p += (pTarget - p)*(reduce ? 1 : .09);
+    const mobile = w < 769;
+
+    let e = 0;
+    if (p < .12) e = 0;
+    else if (p < .5) e = ease((p - .12)/.38);
+    else if (p < .78) e = 1;
+    else if (p < .95) e = 1 - ease((p - .78)/.17);
+    const labels = (!mobile && w >= 1100) ? smooth(.48, .56, p)*(1 - smooth(.74, .8, p)) : 0;
+
+    const cx = mobile ? w*.5 : w*.6;
+    const cy = mobile ? h*.63 - e*h*.02 : h*.5;
+    let W = mobile ? Math.min(w*.68, h*.34) : Math.min(w*.36, h*.44, 560);
+    W *= 1 + .08*smooth(0, .12, p) - .2*e + .06*smooth(.85, 1, p);
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = '#0d0907'; ctx.fillRect(0, 0, w, h);
+
+    // brilho de brasa atrás
+    const pulse = .85 + .15*Math.sin(time*2.1) + .05*Math.sin(time*7.3);
+    ctx.fillStyle = rad(ctx, cx, cy + W*.2, W*1.5, `rgba(255,96,20,${.26*pulse})`, 'rgba(255,96,20,0)');
+    ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = rad(ctx, cx, h*1.05, w*.7, `rgba(255,70,10,${.18*pulse})`, 'rgba(255,70,10,0)');
+    ctx.fillRect(0, 0, w, h);
+
+    // camera: leve balanço
+    ctx.save();
+    ctx.translate(cx, cy); ctx.rotate(-.04 + .08*p + (reduce ? 0 : Math.sin(time*.6)*.006)); ctx.translate(-cx, -cy);
+    drawBurger(ctx, cx, cy + (reduce ? 0 : Math.sin(time*1.1)*3), W, e, { labels });
+    ctx.restore();
+
+    // brasas
+    if (!reduce) {
+      if (embers.length < (mobile ? 45 : 90)) spawn(cx, cy, W);
+      ctx.globalCompositeOperation = 'lighter';
+      for (let i = embers.length - 1; i >= 0; i--) {
+        const m = embers[i];
+        m.x += m.vx + Math.sin(time*2 + m.f)*.35; m.y += m.vy; m.life -= .0045;
+        if (m.life <= 0 || m.y < -10) { embers.splice(i, 1); continue; }
+        const a = m.life*(.55 + .45*Math.sin(time*9 + m.f));
+        ctx.fillStyle = `rgba(255,${120 + (m.f*20|0)},40,${a})`;
+        ctx.beginPath(); ctx.arc(m.x, m.y, m.s, 0, TAU); ctx.fill();
+        ctx.fillStyle = `rgba(255,90,20,${a*.18})`;
+        ctx.beginPath(); ctx.arc(m.x, m.y, m.s*4, 0, TAU); ctx.fill();
+      }
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    beats.forEach(b => b.classList.toggle('on', p >= +b.dataset.from && p < +b.dataset.to));
+    bars.forEach((b, i) => { const a = [0, .12, .5, .78][i], z = [.12, .5, .78, 1][i]; b.style.transform = `scaleY(${clamp((p - a)/(z - a), 0, 1)})`; });
+    hint.style.opacity = p > .03 ? 0 : 1;
+
+    requestAnimationFrame(frame);
+  }
+
+  addEventListener('resize', resize);
+  resize();
+  requestAnimationFrame(frame);
+
+  /* ---------- miniaturas do cardápio ---------- */
+  function thumbs() {
+    document.querySelectorAll('canvas[data-burger]').forEach(cv => {
+      const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 2);
+      cv.width = r.width*d; cv.height = r.height*d;
+      const c = cv.getContext('2d'); c.scale(d, d);
+      const W = Math.min(r.width*.62, r.height*.7);
+      drawBurger(c, r.width/2, r.height*.5, W, 0, { stack: cv.dataset.burger });
+    });
+  }
+  thumbs(); addEventListener('resize', thumbs);
+
+  /* ---------- entrada suave ---------- */
+  const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }), { threshold: .15 });
+  document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = (i % 4)*90 + 'ms'; io.observe(el); });
+
+  if (document.fonts) document.fonts.ready.then(thumbs);
+})();
+</script>
+</body>
+</html>
