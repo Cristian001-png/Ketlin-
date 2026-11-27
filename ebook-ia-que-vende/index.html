@@ -277,6 +277,101 @@
     .reveal{opacity:1;transform:none}
     .marquee div,body::after,.caret{animation:none}
   }
+
+  /* ===== gatilhos ===== */
+  .pain{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .pain .card{display:flex;gap:14px;align-items:flex-start}
+  .pain .card .x{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:rgba(220,80,80,.12);color:#ff8a80;font-weight:700}
+  .pain .card p{color:var(--ink);font-size:16px}
+  .turn{margin-top:28px;text-align:center;font-family:"Instrument Serif",serif;font-size:clamp(26px,3vw,42px);line-height:1.2}
+  .turn b{font-family:Lato;font-weight:900;font-style:normal;text-transform:uppercase;color:var(--gold)}
+  @media(max-width:760px){.pain{grid-template-columns:1fr}}
+  .vs{border:1px solid var(--line);border-radius:20px;overflow:hidden}
+  .vs div{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+  .vs div:first-child{border-top:0;font-size:12px;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+  .vs span{padding:16px 22px;font-size:15px}
+  .vs span:first-child{color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(255,138,128,.5)}
+  .vs span:last-child{color:var(--ink);background:rgba(201,162,76,.06);border-left:1px solid var(--line)}
+  .vs div:first-child span{text-decoration:none;color:var(--muted)}
+  .vs div:first-child span:last-child{color:var(--gold)}
+  .notfor{margin-top:16px;border:1px dashed rgba(255,138,128,.35);border-radius:20px;padding:26px}
+  .notfor h3{font-family:Lato;font-weight:900;text-transform:uppercase;font-size:18px;margin-bottom:12px}
+  .notfor ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 24px}
+  .notfor li{color:var(--muted);font-size:15px;padding-left:22px;position:relative}
+  .notfor li::before{content:"✕";position:absolute;left:0;color:#ff8a80;font-size:12px;top:3px}
+  @media(max-width:700px){.notfor ul{grid-template-columns:1fr}}
+  .peek{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .peek button{border:0;padding:0;background:none;cursor:zoom-in;position:relative;border-radius:10px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.45);transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+  .peek button:hover{transform:translateY(-6px) rotate(-1deg)}
+  .peek img{width:100%;height:auto}
+  .peek span{position:absolute;left:0;right:0;bottom:0;padding:30px 14px 12px;background:linear-gradient(transparent,rgba(6,13,26,.95));font-size:13px;font-weight:700;text-align:left;color:var(--ink)}
+  .peek .free{position:absolute;top:10px;left:10px;background:var(--gold);color:#0a1222;font-size:11px;font-weight:700;letter-spacing:.1em;padding:4px 9px;border-radius:999px}
+  @media(max-width:860px){.peek{grid-template-columns:1fr 1fr}}
+  .lb{position:fixed;inset:0;z-index:80;background:rgba(3,6,12,.92);display:none;place-items:center;padding:20px;backdrop-filter:blur(6px)}
+  .lb.on{display:grid}
+  .lb img{max-height:88vh;width:auto;max-width:100%;border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+  .lb .close{position:absolute;top:16px;right:18px;background:none;border:1px solid var(--line);color:var(--ink);width:44px;height:44px;border-radius:50%;font-size:22px;cursor:pointer}
+  .lb .lbcta{position:absolute;bottom:22px;left:50%;transform:translateX(-50%)}
+  .copy{margin:0 22px 20px;font:inherit;font-size:13px;font-weight:700;background:transparent;color:var(--gold2);border:1px solid rgba(201,162,76,.4);border-radius:999px;padding:9px 16px;cursor:pointer}
+  .author{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center}
+  .avatar{width:150px;height:150px;border-radius:50%;background:linear-gradient(145deg,var(--navy2),var(--navy));display:grid;place-items:center;font-family:Lato;font-weight:900;font-size:48px;color:var(--gold);border:1px solid rgba(201,162,76,.4);background-size:cover;background-position:center}
+  .author h3{font-family:Lato;font-weight:900;text-transform:uppercase;font-size:clamp(28px,3vw,40px)}
+  .author p{color:var(--muted);margin-top:10px;max-width:640px}
+  .author .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .author .tags span{font-size:12px;border:1px solid var(--line);padding:5px 11px;border-radius:999px;color:var(--ink)}
+  @media(max-width:640px){.author{grid-template-columns:1fr;text-align:left}.avatar{width:110px;height:110px;font-size:36px}}
+  .testis{grid-template-columns:repeat(3,1fr)}
+  .testis .card p{color:var(--ink);font-size:16px}
+  .testis .card b{display:block;margin-top:16px;font-size:14px}
+  .testis .card small{color:var(--muted)}
+  @media(max-width:900px){.testis{grid-template-columns:1fr}}
+  .quiz{max-width:860px}
+  .quiz label{display:flex;gap:16px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:16px 20px;margin-bottom:10px;cursor:pointer;transition:.25s;font-size:16px}
+  .quiz label:hover{border-color:rgba(201,162,76,.4)}
+  .quiz input{appearance:none;-webkit-appearance:none;flex:none;width:24px;height:24px;border-radius:7px;border:1.5px solid var(--muted);display:grid;place-items:center;cursor:pointer;transition:.2s}
+  .quiz input:checked{background:var(--gold);border-color:var(--gold)}
+  .quiz input:checked::after{content:"";width:10px;height:6px;border-left:2px solid #0a1222;border-bottom:2px solid #0a1222;transform:rotate(-45deg) translate(1px,-1px)}
+  .quiz label:has(input:checked){border-color:var(--gold);background:rgba(201,162,76,.07)}
+  .quizres{margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;min-height:56px}
+  .quizres p{font-size:17px}
+  .meter{height:4px;background:var(--line);border-radius:4px;margin-top:6px;overflow:hidden}
+  .meter i{display:block;height:100%;width:0;background:var(--gold);transition:width .5s}
+  .urg{display:none;margin:4px 0 18px;padding:14px 18px;border-radius:14px;border:1px solid rgba(255,138,128,.35);background:rgba(255,138,128,.06)}
+  .urg.on{display:block}
+  .urg small{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#ffb4ab;font-weight:700}
+  .clock{display:flex;gap:10px;margin-top:8px}
+  .clock div{text-align:center;min-width:54px}
+  .clock b{display:block;font-family:Lato;font-weight:900;font-size:28px;line-height:1}
+  .clock span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
+  .perday{font-size:15px;color:var(--gold2);margin:-10px 0 18px}
+  .bonus{display:none;margin:0 0 20px}
+  .bonus.on{display:block}
+  .bonus h4{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  #bonusLista div{border:1px solid rgba(201,162,76,.3);border-radius:12px;padding:12px 16px;margin-bottom:8px;font-size:15px}
+  #bonusLista div b{color:var(--gold2)}
+  .trust{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;font-size:13px;color:var(--muted)}
+  .trust span::before{content:"✓ ";color:var(--gold)}
+  .seal{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,4vw,48px);align-items:center;border:1px solid var(--line);border-radius:28px;padding:clamp(24px,4vw,48px);background:var(--bg2)}
+  .seal .ring{width:170px;height:170px;border-radius:50%;border:2px solid var(--gold);display:grid;place-items:center;text-align:center;position:relative;box-shadow:0 0 0 8px rgba(201,162,76,.08)}
+  .seal .ring b{font-family:Lato;font-weight:900;font-size:64px;line-height:.9;color:var(--gold)}
+  .seal .ring span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;display:block;margin-top:4px}
+  .seal h2{font-size:clamp(30px,3.6vw,52px)}
+  .seal h2 .serif{color:var(--gold)}
+  .seal p{color:var(--muted);margin-top:12px;max-width:620px}
+  @media(max-width:700px){.seal{grid-template-columns:1fr}.seal .ring{width:130px;height:130px}.seal .ring b{font-size:48px}}
+  .final{text-align:center;padding:clamp(90px,13vw,170px) 16px;position:relative;overflow:hidden;border-top:1px solid var(--line)}
+  .final::before{content:"";position:absolute;left:50%;bottom:-50%;width:120vw;height:100%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(201,162,76,.22),transparent 65%);pointer-events:none}
+  .final h2{font-size:clamp(40px,7vw,110px);position:relative}
+  .final h2 .serif{display:block;color:var(--gold);font-size:.6em}
+  .final p{color:var(--muted);max-width:560px;margin:22px auto 30px;position:relative}
+  .final .actions{position:relative;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .modal{position:fixed;inset:0;z-index:85;background:rgba(3,6,12,.8);display:none;place-items:center;padding:20px;backdrop-filter:blur(6px)}
+  .modal.on{display:grid;animation:fade .4s ease}
+  .modal .box{max-width:520px;width:100%;border:1px solid rgba(201,162,76,.4);border-radius:24px;padding:34px;background:linear-gradient(160deg,var(--navy),var(--bg));position:relative}
+  .modal h3{font-family:Lato;font-weight:900;text-transform:uppercase;font-size:28px;line-height:1.05}
+  .modal h3 .serif{color:var(--gold);display:block}
+  .modal p{color:var(--muted);margin:14px 0 22px}
+  .modal .close{position:absolute;top:14px;right:14px;background:none;border:0;color:var(--muted);font-size:24px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -352,6 +447,35 @@
   <span>Pesquisa</span><em>✦</em><span>Oferta</span><em>✦</em><span>Marca</span><em>✦</em><span>Aquisição</span><em>✦</em><span>Vendas</span><em>✦</em><span>Automação</span><em>✦</em><span>Métricas</span><em>✦</em>
 </div></div>
 
+<!-- ============ DOR (gatilho: problema e agitação) ============ -->
+<section class="block" id="problema">
+  <div class="head reveal">
+    <div><div class="eyebrow">O problema</div>
+    <h2 class="display">Você já usa IA. <span class="serif">Por que as vendas não vêm?</span></h2></div>
+    <p>Se uma destas frases é sobre você, o problema não é falta de esforço.</p>
+  </div>
+  <div class="pain">
+    <div class="card reveal"><span class="x">✕</span><p>Você pede um texto para a IA e recebe uma resposta genérica, que ninguém compra.</p></div>
+    <div class="card reveal"><span class="x">✕</span><p>Você posta, anuncia e testa sem saber qual número olhar para decidir.</p></div>
+    <div class="card reveal"><span class="x">✕</span><p>Não sabe se o que trava é a oferta, a página, o anúncio ou o atendimento.</p></div>
+    <div class="card reveal"><span class="x">✕</span><p>Toda semana recomeça do zero, sem um processo que se repita e melhore.</p></div>
+  </div>
+  <p class="turn reveal">O problema não é a ferramenta. <b>É a falta de sistema.</b></p>
+</section>
+
+<!-- ============ ANTES x DEPOIS (gatilho: transformação) ============ -->
+<section class="block" style="padding-top:0">
+  <div class="vs reveal">
+    <div><span>Sem método</span><span>Com o IA QUE VENDE</span></div>
+    <div><span>Prompt genérico, resposta genérica</span><span>Fórmula Papel + Contexto + Tarefa + Formato + Restrições</span></div>
+    <div><span>Decidir no achismo</span><span>CAC, conversão, LTV e payback num painel</span></div>
+    <div><span>Oferta vaga, preço chutado</span><span>Oferta com preço, prova e política de satisfação</span></div>
+    <div><span>Postar e torcer</span><span>Aquisição orgânica e paga com regras de teste</span></div>
+    <div><span>Lead esquecido no WhatsApp</span><span>CRM, roteiro de venda e cadência de follow-up</span></div>
+    <div><span>Recomeçar todo mês</span><span>Ciclo de experimentos e plano de 90 dias</span></div>
+  </div>
+</section>
+
 <!-- ============ PARA QUEM ============ -->
 <section class="block" id="para-quem">
   <div class="head reveal">
@@ -366,6 +490,15 @@
     <div class="card reveal"><b>04</b><div><h3>Donos de pequenos negócios</h3><p>Que querem usar a IA para ganhar tempo sem perder o controle da venda.</p></div></div>
     <div class="card reveal"><b>05</b><div><h3>Times comerciais</h3><p>Que precisam de CRM, roteiro de venda, objeções e follow-up organizados.</p></div></div>
     <div class="card reveal"><b>06</b><div><h3>Agências</h3><p>Que querem um sistema replicável de aquisição, métricas e otimização.</p></div></div>
+  </div>
+  <div class="notfor reveal">
+    <h3>Não é para você se…</h3>
+    <ul>
+      <li>Procura fórmula mágica ou dinheiro rápido.</li>
+      <li>Não pode reservar de 60 a 90 minutos por dia, nem estender o prazo.</li>
+      <li>Quer que a IA faça tudo sozinha, sem revisão humana.</li>
+      <li>Quer prometer ao cliente um resultado que não controla.</li>
+    </ul>
   </div>
 </section>
 
@@ -491,6 +624,21 @@
   </div>
 </section>
 
+<!-- ============ POR DENTRO (gatilhos: reciprocidade e curiosidade) ============ -->
+<section class="block" id="por-dentro">
+  <div class="head reveal">
+    <div><div class="eyebrow">Veja por dentro</div>
+    <h2 class="display">Páginas reais. <span class="serif">Leia o Dia 01 de graça.</span></h2></div>
+    <p>Clique numa página para ampliar. O Dia 01 está liberado inteiro para você começar hoje.</p>
+  </div>
+  <div class="peek">
+    <button class="reveal" data-img="assets/p07.webp"><img src="assets/p07.webp" alt="Página do método IA QUE VENDE" loading="lazy" width="760" height="1075"><span>O método</span></button>
+    <button class="reveal" data-img="assets/p12.webp"><i class="free">GRÁTIS</i><img src="assets/p12.webp" alt="Página do Dia 01" loading="lazy" width="760" height="1075"><span>Dia 01 · aula completa</span></button>
+    <button class="reveal" data-img="assets/p62.webp"><img src="assets/p62.webp" alt="Página de métricas" loading="lazy" width="760" height="1075"><span>Métricas e fórmulas</span></button>
+    <button class="reveal" data-img="assets/p67.webp"><img src="assets/p67.webp" alt="Página da biblioteca de prompts" loading="lazy" width="760" height="1075"><span>Biblioteca de prompts</span></button>
+  </div>
+</section>
+
 <!-- ============ O QUE VOCÊ TERÁ ============ -->
 <section class="block">
   <div class="head reveal">
@@ -517,6 +665,7 @@
     <div class="terminal reveal" aria-label="Exemplo de prompt do e-book">
       <div class="bar"><i></i><i></i><i></i><span>Exemplo do e-book</span></div>
       <pre id="typed"></pre>
+      <button class="copy" id="copyPrompt">Copiar este prompt grátis</button>
     </div>
   </div>
   <div class="lib">
@@ -588,6 +737,41 @@
   </div>
 </section>
 
+<!-- ============ AUTOR (gatilho: autoridade) ============ -->
+<section class="block" id="autor">
+  <div class="author reveal">
+    <div class="avatar" id="avatar">CC</div>
+    <div>
+      <div class="eyebrow">Quem escreveu</div>
+      <h3 style="margin-top:12px" id="autorNome">Cristian Costa</h3>
+      <p id="autorBio"><span class="ph">[PREENCHER: mini-bio com a sua experiência real]</span></p>
+      <div class="tags"><span>Autor do método IA QUE VENDE</span><span>Edição 2026</span><span>86 páginas de método aplicado</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROVA SOCIAL (só aparece com depoimentos reais) ============ -->
+<section class="block" id="provas" hidden>
+  <div class="head reveal">
+    <div><div class="eyebrow">Quem já leu</div>
+    <h2 class="display" id="provasTitulo">O que dizem <span class="serif">os leitores.</span></h2></div>
+  </div>
+  <div class="grid testis" id="testis"></div>
+</section>
+
+<!-- ============ QUIZ (gatilho: compromisso e coerência) ============ -->
+<section class="block quiz" id="quiz">
+  <div class="head reveal" style="margin-bottom:28px"><div><div class="eyebrow">Teste rápido</div>
+  <h2 class="display">Marque o que <span class="serif">é verdade para você.</span></h2></div></div>
+  <label class="reveal"><input type="checkbox"> Quero vender mais, mas sem depender de sorte ou de truques.</label>
+  <label class="reveal"><input type="checkbox"> Já uso IA, mas as respostas saem genéricas.</label>
+  <label class="reveal"><input type="checkbox"> Não sei exatamente quanto me custa conquistar um cliente.</label>
+  <label class="reveal"><input type="checkbox"> Perco vendas por falta de follow-up.</label>
+  <label class="reveal"><input type="checkbox"> Topo dedicar 60 a 90 minutos por dia durante 30 dias.</label>
+  <div class="meter"><i id="meter"></i></div>
+  <div class="quizres"><p id="quizMsg">Marque as frases que descrevem o seu momento.</p><a class="btn" href="#oferta" id="quizCta" style="display:none">Começar o meu Dia 01 →</a></div>
+</section>
+
 <!-- ============ OFERTA ============ -->
 <section class="block offer" id="oferta">
   <div class="offerbox reveal">
@@ -605,9 +789,25 @@
         <li>Kit de ferramentas por categoria</li>
         <li>Ética, regras de uso da IA e glossário</li>
       </ul>
-      <div class="price"><s>de <span class="ph">[PREENCHER]</span></s><b>R$ <span class="ph">[PREENCHER]</span></b></div>
+      <div class="bonus" id="bonus"><h4 id="bonusTitulo">Bônus</h4><div id="bonusLista"></div></div>
+      <div class="urg" id="urg"><small id="urgTexto">O preço de lançamento termina em</small>
+        <div class="clock"><div><b data-u="d">0</b><span>dias</span></div><div><b data-u="h">00</b><span>horas</span></div><div><b data-u="m">00</b><span>min</span></div><div><b data-u="s">00</b><span>seg</span></div></div></div>
+      <div class="price"><s data-show-de>de <span data-preco-de><span class="ph">[PREENCHER]</span></span></s><b>R$ <span data-preco><span class="ph">[PREENCHER]</span></span></b></div>
+      <p class="perday" data-perday></p>
       <a class="btn" href="#" data-checkout>Quero o IA QUE VENDE →</a>
-      <p class="fine">Garantia: <span class="ph">[PREENCHER]</span> · Acesso imediato ao PDF de 86 páginas · Licença de uso pessoal e intransferível.</p>
+      <div class="trust"><span>Acesso imediato ao PDF</span><span><span data-garantia>7</span> dias de garantia</span><span>Edição 2026 atualizada</span><span>Licença de uso pessoal</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GARANTIA (gatilho: risco zero) ============ -->
+<section class="block" id="garantia">
+  <div class="seal reveal">
+    <div class="ring"><div><b data-garantia>7</b><span>dias de<br>garantia</span></div></div>
+    <div>
+      <div class="eyebrow">O risco é todo meu</div>
+      <h2 class="display" style="margin-top:12px">Leia, aplique <span class="serif">e decida depois.</span></h2>
+      <p>Você tem <b data-garantia>7</b> dias para conhecer o método por dentro. Se achar que o IA QUE VENDE não é para você, peça o reembolso pela plataforma de compra dentro do prazo e receba o valor de volta.</p>
     </div>
   </div>
 </section>
@@ -620,7 +820,17 @@
   <details class="reveal"><summary>O e-book garante que vou vender mais?</summary><p>Não, e ele deixa isso claro. É um material educacional com métodos, modelos e exercícios. O resultado depende do mercado, da oferta, da execução, do orçamento e da qualidade da entrega.</p></details>
   <details class="reveal"><summary>Serve para o meu tipo de negócio?</summary><p>Foi escrito para profissionais autônomos, consultores, infoprodutores, donos de pequenos negócios, times comerciais e agências. Os exemplos são ilustrativos, e você adapta ao seu segmento.</p></details>
   <details class="reveal"><summary>Quais ferramentas vou precisar?</summary><p>Comece pelo simples: uma planilha e uma ferramenta de página resolvem muito. O kit de ferramentas indica opções por categoria (IA, páginas, anúncios, CRM, automação, pagamento) para quando você precisar.</p></details>
+  <details class="reveal"><summary>Nunca vendi pela internet. Serve para mim?</summary><p>Serve. O método começa do zero: diagnóstico, pesquisa de mercado, entrevistas e validação da dor, antes de qualquer anúncio ou página.</p></details>
+  <details class="reveal"><summary>Preciso investir em anúncios?</summary><p>Não para começar. O e-book ensina aquisição orgânica e prospecção ativa. O tráfego pago entra com orçamento de aprendizado e regras de parada definidas antes de gastar.</p></details>
+  <details class="reveal"><summary>Vale o investimento?</summary><p data-faqpreco>São 30 aulas práticas, 26 prompts, 16 exercícios, 9 checklists e um plano de 90 dias, e você ainda tem garantia para decidir sem risco.</p></details>
   <details class="reveal"><summary>Como recebo o e-book?</summary><p>Em PDF de 86 páginas, com licença de uso pessoal e intransferível. <span class="ph">[PREENCHER: forma de entrega e plataforma]</span></p></details>
+</section>
+
+<!-- ============ CTA FINAL (gatilho: decisão) ============ -->
+<section class="final">
+  <h2 class="display reveal">Daqui a 30 dias <span class="serif">você vai desejar ter começado hoje.</span></h2>
+  <p class="reveal">Você pode continuar testando no escuro ou abrir o Dia 01 amanhã cedo, com um método, uma métrica e uma missão por dia.</p>
+  <div class="actions reveal"><a class="btn" href="#" data-checkout>Quero o IA QUE VENDE →</a><a class="btn ghost" href="#por-dentro">Ler o Dia 01 grátis</a></div>
 </section>
 
 <footer>
@@ -628,8 +838,36 @@
   <div style="max-width:520px">Conteúdo educacional. Não constitui consultoria jurídica, contábil ou financeira e não garante resultados ou faturamento.<br>Suporte: <span class="ph">[PREENCHER e-mail]</span></div>
 </footer>
 
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Página do e-book ampliada"><button class="close" aria-label="Fechar">×</button><img alt="Página do e-book"><a class="btn lbcta" href="#oferta">Quero o e-book completo →</a></div>
+
+<div class="modal" id="exit" role="dialog" aria-modal="true" aria-labelledby="exitT"><div class="box"><button class="close" aria-label="Fechar">×</button>
+  <h3 id="exitT">Antes de ir, <span class="serif">leve uma aula de graça.</span></h3>
+  <p>O Dia 01 do IA QUE VENDE está liberado inteiro. Leia agora e veja se o método é para você.</p>
+  <button class="btn" id="exitRead">Ler o Dia 01 grátis</button></div></div>
+
 <div class="sticky-cta" id="stickyCta"><a class="btn" href="#oferta">Quero o IA QUE VENDE →</a></div>
 
+<script>
+/* =========================================================
+   CONFIGURAÇÃO DA OFERTA: preencha só com dados verdadeiros.
+   Campo vazio (null ou []) = o bloco correspondente não aparece.
+   ========================================================= */
+window.OFERTA = {
+  preco: null,            // ex.: 47  (R$)
+  precoDe: null,          // ex.: 97  (preço cheio real, se existir)
+  checkoutUrl: null,      // ex.: "https://pay.hotmart.com/XXXX"
+  garantiaDias: 7,        // prazo da sua política de reembolso
+  ofertaAte: null,        // fim REAL do preço promocional, ex.: "2026-12-15T23:59:00-03:00"
+  textoUrgencia: "O preço de lançamento termina em",
+  bonus: [],              // ex.: [{ titulo: "Planilha de métricas", descricao: "Modelo pronto do painel" }]
+  bonusLimite: null,      // ex.: "Bônus exclusivos para os 100 primeiros compradores" (só se for verdade)
+  depoimentos: [],        // ex.: [{ texto: "...", nome: "Ana S.", cargo: "Consultora" }] (com autorização)
+  leitores: null,         // ex.: 350 (número real de compradores)
+  autorBio: null,         // ex.: "Há 8 anos ajudo pequenos negócios a vender..."
+  autorFoto: null,        // ex.: "assets/autor.jpg"
+  emailSuporte: null      // ex.: "suporte@seudominio.com"
+};
+</script>
 <script>
 (() => {
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -815,6 +1053,89 @@
     const r = offer.getBoundingClientRect();
     sticky.classList.toggle('on', scrollY > innerHeight*.6 && !(r.top < innerHeight && r.bottom > 0));
   }, { passive: true });
+
+  /* ---------- gatilhos: configuração ---------- */
+  const O = window.OFERTA || {};
+  const brl = v => v.toLocaleString('pt-BR', { minimumFractionDigits: Number.isInteger(v) ? 0 : 2, maximumFractionDigits: 2 });
+  if (O.preco) {
+    document.querySelectorAll('[data-preco]').forEach(e => e.textContent = brl(O.preco));
+    const dia = O.preco/30;
+    document.querySelectorAll('[data-perday]').forEach(e => e.textContent = `Isso dá R$ ${brl(Math.round(dia*100)/100)} por aula.`);
+    document.querySelectorAll('[data-faqpreco]').forEach(e => e.textContent = `São 30 aulas práticas por R$ ${brl(O.preco)}, cerca de R$ ${brl(Math.round(dia*100)/100)} por aula, mais 26 prompts, 16 exercícios, 9 checklists e um plano de 90 dias. E você ainda tem ${O.garantiaDias || 7} dias de garantia para decidir sem risco.`);
+  }
+  if (O.precoDe && O.preco && O.precoDe > O.preco) document.querySelectorAll('[data-preco-de]').forEach(e => e.textContent = 'R$ ' + brl(O.precoDe));
+  else if (O.preco) document.querySelectorAll('[data-show-de]').forEach(e => e.remove());
+  if (O.garantiaDias) document.querySelectorAll('[data-garantia]').forEach(e => e.textContent = O.garantiaDias);
+  if (O.checkoutUrl) document.querySelectorAll('[data-checkout]').forEach(a => { a.href = O.checkoutUrl; a.target = '_blank'; a.rel = 'noopener'; });
+
+  // urgência: só com data real definida e ainda no futuro
+  const urg = document.getElementById('urg');
+  if (O.ofertaAte && new Date(O.ofertaAte) > new Date()) {
+    urg.classList.add('on');
+    document.getElementById('urgTexto').textContent = O.textoUrgencia;
+    const end = new Date(O.ofertaAte).getTime(), U = k => urg.querySelector(`[data-u="${k}"]`);
+    const tick = () => {
+      const d = Math.max(0, end - Date.now());
+      if (d === 0) { urg.classList.remove('on'); return; }
+      U('d').textContent = Math.floor(d/864e5); U('h').textContent = String(Math.floor(d/36e5)%24).padStart(2, '0');
+      U('m').textContent = String(Math.floor(d/6e4)%60).padStart(2, '0'); U('s').textContent = String(Math.floor(d/1e3)%60).padStart(2, '0');
+      setTimeout(tick, 1000);
+    };
+    tick();
+  }
+
+  // bônus e escassez de bônus: só se existirem
+  if (O.bonus && O.bonus.length) {
+    const b = document.getElementById('bonus'); b.classList.add('on');
+    if (O.bonusLimite) document.getElementById('bonusTitulo').textContent = O.bonusLimite;
+    document.getElementById('bonusLista').innerHTML = O.bonus.map(x => `<div><b>+ ${x.titulo}</b>${x.descricao ? ' · ' + x.descricao : ''}</div>`).join('');
+  }
+
+  // prova social: só com depoimentos reais
+  if (O.depoimentos && O.depoimentos.length) {
+    const sec = document.getElementById('provas'); sec.hidden = false;
+    if (O.leitores) document.getElementById('provasTitulo').innerHTML = `${O.leitores.toLocaleString('pt-BR')} leitores <span class="serif">já começaram.</span>`;
+    document.getElementById('testis').innerHTML = O.depoimentos.map(d => `<div class="card reveal in"><p>“${d.texto}”</p><b>${d.nome}</b><small>${d.cargo || ''}</small></div>`).join('');
+  }
+
+  // autoridade
+  if (O.autorBio) document.getElementById('autorBio').textContent = O.autorBio;
+  if (O.autorFoto) { const a = document.getElementById('avatar'); a.style.backgroundImage = `url(${O.autorFoto})`; a.textContent = ''; }
+  if (O.emailSuporte) document.querySelectorAll('footer .ph').forEach(e => { if (/e-mail/.test(e.textContent)) e.outerHTML = `<a href="mailto:${O.emailSuporte}">${O.emailSuporte}</a>`; });
+
+  /* ---------- quiz de compromisso ---------- */
+  const qs = [...document.querySelectorAll('#quiz input')], meter = document.getElementById('meter'), qm = document.getElementById('quizMsg'), qc = document.getElementById('quizCta');
+  const msgs = ['Marque as frases que descrevem o seu momento.', 'Já é um começo. O método ataca exatamente esse ponto.', 'Você está no perfil para quem o IA QUE VENDE foi escrito.', 'Você está no perfil para quem o IA QUE VENDE foi escrito.', 'Quase tudo bate. O Dia 01 resolve o primeiro passo.', 'Cinco de cinco: o método foi feito para o seu momento.'];
+  qs.forEach(q => q.addEventListener('change', () => {
+    const n = qs.filter(x => x.checked).length;
+    meter.style.width = n*20 + '%'; qm.textContent = msgs[n]; qc.style.display = n >= 2 ? '' : 'none';
+  }));
+
+  /* ---------- páginas ampliadas (reciprocidade) ---------- */
+  const lb = document.getElementById('lb'), lbImg = lb.querySelector('img');
+  const openLb = src => { lbImg.src = src; lb.classList.add('on'); };
+  document.querySelectorAll('.peek button').forEach(b => b.addEventListener('click', () => openLb(b.dataset.img)));
+  lb.addEventListener('click', e => { if (e.target === lb || e.target.classList.contains('close')) lb.classList.remove('on'); });
+  lb.querySelector('.lbcta').addEventListener('click', () => lb.classList.remove('on'));
+  addEventListener('keydown', e => { if (e.key === 'Escape') { lb.classList.remove('on'); exitM.classList.remove('on'); } });
+
+  /* ---------- copiar prompt grátis ---------- */
+  document.getElementById('copyPrompt').addEventListener('click', async e => {
+    const txt = prompt.map(([t, tag]) => t + tag).join('').replace(/ \(\w+\)\.?/g, m => m.endsWith('.') ? '.' : '');
+    try { await navigator.clipboard.writeText(txt); e.target.textContent = 'Copiado! Cole na sua IA'; } catch (_) { e.target.textContent = 'Selecione o texto acima e copie'; }
+  });
+
+  /* ---------- intenção de saída (computador, uma vez) ---------- */
+  const exitM = document.getElementById('exit');
+  let exitShown = false;
+  try { exitShown = sessionStorage.getItem('exitShown') === '1'; } catch (_) {}
+  document.addEventListener('mouseout', e => {
+    if (exitShown || e.relatedTarget || e.clientY > 8 || innerWidth < 900) return;
+    exitShown = true; try { sessionStorage.setItem('exitShown', '1'); } catch (_) {}
+    exitM.classList.add('on');
+  });
+  exitM.addEventListener('click', e => { if (e.target === exitM || e.target.classList.contains('close')) exitM.classList.remove('on'); });
+  document.getElementById('exitRead').addEventListener('click', () => { exitM.classList.remove('on'); openLb('assets/p12.webp'); });
 
   /* ---------- checkout (preencher) ---------- */
   document.querySelectorAll('[data-checkout]').forEach(a => a.addEventListener('click', e => {
